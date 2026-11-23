@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0b0b0b;
+  --color-ink-2: #141414;
+  --color-ink-3: #1d1d1d;
+  --color-gold: #e5b30b;
+  --color-gold-deep: #c99a00;
+  --color-paper: #f3f1ec;
+  --color-mist: #e7e7e5;
+  --color-smoke: #8a8a86;
+
+  --font-display: var(--font-barlow), "Arial Narrow", sans-serif;
+  --font-tech: var(--font-orbitron), sans-serif;
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Slashed stripe pattern used on the catalogue's dark pages */
+.bg-slash {
+  background-color: var(--color-ink);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.025) 0 2px,
+    transparent 2px 9px
+  );
+}
+
+.bg-slash-light {
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgb(0 0 0 / 0.035) 0 2px,
+    transparent 2px 10px
+  );
+}
+
+/* Chamfered (cut-corner) shapes, a nod to the catalogue's angled panels */
+.chamfer {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+.chamfer-sm {
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+/* Outlined display text */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+.text-outline-gold {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-gold);
+}
+
+/* Marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+.marquee-pause:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Button sweep: a gold bar slides across on hover */
+.btn-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--sweep, var(--color-ink));
+  transform: translateX(-101%) skewX(-12deg);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-snap);
+}
+.btn-sweep:hover::before,
+.btn-sweep:focus-visible::before {
+  transform: translateX(0) skewX(0);
+}
+
+/* Link underline that grows from the left */
+.link-grow {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.35s var(--ease-out-quart);
+}
+.link-grow:hover {
+  background-size: 100% 1.5px;
+}
+
+/* Inputs */
+.field {
+  width: 100%;
+  border: 1.5px solid rgb(0 0 0 / 0.14);
+  background: #fff;
+  padding: 0.8rem 0.95rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

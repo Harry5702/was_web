@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WAS Sportswear website
 
-## Getting Started
+Next.js 16 (App Router) + Tailwind CSS 4 + Motion. All products come from the WAS product catalogue PDF.
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| Product data (11 lines, 44 designs, specs) | `src/lib/catalogue.ts` |
+| Phone numbers, email, WhatsApp links | `src/lib/site.ts` |
+| Product images (`was-101.webp` …) | `public/products/` |
+| Logos and emblem | `public/brand/` |
+| Hero photos and cut-outs | `public/hero/` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To add a design: drop the image in `public/products/` and add a `p(...)` entry to its category in `catalogue.ts`.
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+- `/`: home (hero, about, product lines, capabilities, catalogue tabs, process)
+- `/products`: full catalogue with filters
+- `/products/[category]`: one product line with specs
+- `/products/[category]/[product]`: product detail with zoom and enquiry
+- `/quote`: quote list (saved in the visitor's browser)
+- `/contact`: contact details and quote form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Enquiries
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The quote and contact forms don't need a server. They build the message and open WhatsApp
+(+92 312 7536091) or the visitor's email app addressed to wasindustry0@gmail.com. To receive
+form submissions directly instead, add a Server Action that sends email (for example through Resend or SMTP).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Set `NEXT_PUBLIC_SITE_URL` to the live domain when deploying so social share images resolve correctly.
