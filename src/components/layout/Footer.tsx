@@ -19,7 +19,7 @@ export function Footer() {
       </div>
 
       <div className="h-1.5 bg-gold" />
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
+      <div className="relative mx-auto grid grid-cols-1 max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.1fr]">
         <div>
           <Image
             src="/brand/logo-horizontal.png"
@@ -103,7 +103,8 @@ export function Footer() {
       </div>
 
       <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-white/45 sm:flex-row">
+        {/* extra bottom space on phones so the floating WhatsApp button doesn't cover this row */}
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 pt-5 pb-24 text-xs text-white/45 sm:flex-row sm:pb-5">
           <p>
             © <CurrentYear /> WAS Sportswear. All rights reserved.
           </p>

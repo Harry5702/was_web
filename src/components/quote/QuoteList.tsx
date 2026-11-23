@@ -33,7 +33,7 @@ export function QuoteList() {
 
   return (
     <section className="bg-paper py-16 md:py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-6 lg:grid-cols-[1.1fr_1fr]">
+      <div className="mx-auto grid grid-cols-1 max-w-7xl gap-12 px-5 md:px-6 lg:grid-cols-[1.1fr_1fr]">
         <div>
           <div className="flex items-end justify-between border-b-2 border-ink pb-3">
             <h2 className="font-display text-3xl font-extrabold uppercase">

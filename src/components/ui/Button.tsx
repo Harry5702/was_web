@@ -13,7 +13,7 @@ const styles: Record<Variant, string> = {
 };
 
 const base =
-  "btn-sweep chamfer-sm group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 font-display text-[17px] font-bold tracking-wider uppercase transition-colors duration-300";
+  "btn-sweep chamfer-sm group inline-flex items-center justify-center gap-2.5 whitespace-nowrap px-7 py-3.5 font-display text-[17px] font-bold tracking-wider uppercase transition-colors duration-300";
 
 export function ButtonLink({
   variant = "gold",

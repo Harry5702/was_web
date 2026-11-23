@@ -28,7 +28,7 @@ export function SpecList({ category, dark = false }: { category: Category; dark?
 
 export function OptionBadges({ dark = false }: { dark?: boolean }) {
   return (
-    <ul className="grid gap-2.5 sm:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
       {customOptions.map((o) => (
         <li
           key={o.key}
@@ -55,8 +55,8 @@ export function PrintSizes({ category }: { category: Category }) {
         <thead className="sr-only">
           <tr>
             <th>Placement</th>
-            <th>Metric</th>
-            <th>Imperial</th>
+            <th>Size</th>
+            <th className="max-sm:hidden">Imperial</th>
           </tr>
         </thead>
         <tbody>
@@ -65,8 +65,12 @@ export function PrintSizes({ category }: { category: Category }) {
               <th scope="row" className="py-2.5 pr-3 font-semibold text-gold-deep">
                 {s.label}
               </th>
-              <td className="py-2.5 pr-3 text-ink/75">{s.metric}</td>
-              <td className="py-2.5 text-right text-ink/75">{s.imperial}</td>
+              <td className="py-2.5 pr-3 text-ink/75">
+                {s.metric}
+                {/* on phones the imperial size sits under the metric one */}
+                <span className="block text-xs whitespace-nowrap text-ink/50 sm:hidden">{s.imperial}</span>
+              </td>
+              <td className="py-2.5 text-right whitespace-nowrap text-ink/75 max-sm:hidden">{s.imperial}</td>
             </tr>
           ))}
         </tbody>

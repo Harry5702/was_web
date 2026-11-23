@@ -48,7 +48,7 @@ export function Process() {
             <motion.div style={{ scaleY: progress }} className="h-full w-full origin-top bg-gold" />
           </div>
 
-          <ol className="grid gap-10 lg:grid-cols-4 lg:gap-6">
+          <ol className="grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-6">
             {steps.map((s, i) => (
               <Reveal as="li" key={s.title} delay={i * 0.1} className="relative flex gap-6 lg:block lg:text-center">
                 <span className="relative z-10 grid size-14 shrink-0 place-items-center bg-ink font-tech text-lg font-bold text-gold [clip-path:polygon(50%_0,100%_25%,100%_75%,50%_100%,0_75%,0_25%)] lg:mx-auto">

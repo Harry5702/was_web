@@ -94,7 +94,7 @@ export function CatalogueBrowser() {
                     <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 </div>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                   {c.products.map((p) => (
                     <ProductCard key={p.slug} product={{ ...p, categoryTitle: c.title, categorySlug: c.slug }} />
                   ))}
@@ -102,7 +102,7 @@ export function CatalogueBrowser() {
               </section>
             ))
           ) : (
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {visible.flatMap((c) =>
                 c.products.map((p) => (
                   <ProductCard key={p.slug} product={{ ...p, categoryTitle: c.title, categorySlug: c.slug }} />

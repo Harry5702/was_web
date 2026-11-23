@@ -46,7 +46,7 @@ export function Capabilities() {
           intro="These come straight from our product specifications. Exact fabric and finish depend on the product line."
         />
 
-        <div className="mt-14 grid gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-px bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it, i) => (
             <Reveal key={it.title} delay={(i % 3) * 0.08} className="group relative overflow-hidden bg-ink p-8">
               <span className="absolute inset-0 origin-bottom scale-y-0 bg-gold transition-transform duration-500 ease-[cubic-bezier(.7,0,.2,1)] group-hover:scale-y-100" />

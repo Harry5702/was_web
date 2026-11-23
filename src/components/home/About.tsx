@@ -26,7 +26,7 @@ export function About() {
 
   return (
     <section id="about" className="bg-slash-light relative overflow-hidden bg-paper py-24 md:py-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 md:px-6 lg:grid-cols-2">
+      <div className="mx-auto grid grid-cols-1 max-w-7xl items-center gap-16 px-5 md:px-6 lg:grid-cols-2">
         <div>
           <div className="flex items-center gap-3">
             <Slash className="h-[3px] w-8" />
@@ -49,7 +49,7 @@ export function About() {
             </p>
           </Reveal>
 
-          <ul className="mt-10 grid gap-px bg-ink/10 sm:grid-cols-2">
+          <ul className="mt-10 grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2">
             {options.map((o, i) => (
               <Reveal as="li" key={o.title} delay={0.1 + i * 0.07} className="group bg-paper p-5">
                 <div className="flex items-start gap-4">

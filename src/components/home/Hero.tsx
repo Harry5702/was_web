@@ -58,7 +58,7 @@ export function Hero() {
         className="absolute top-[58%] -left-16 h-3 w-48 origin-left -rotate-[24deg] bg-white md:w-72"
       />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pt-14 pb-10 md:px-6 lg:min-h-[calc(100svh-110px)] lg:grid-cols-[1fr_1.05fr] lg:py-16">
+      <div className="relative mx-auto grid grid-cols-1 max-w-7xl items-center gap-10 px-5 pt-14 pb-10 md:px-6 lg:min-h-[calc(100svh-110px)] lg:grid-cols-[1fr_1.05fr] lg:py-16">
         <motion.div style={{ y: textY }} className="relative z-10">
           <motion.p
             initial={{ opacity: 0, x: -14 }}

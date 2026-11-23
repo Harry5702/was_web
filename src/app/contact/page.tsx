@@ -34,7 +34,7 @@ export default function ContactPage() {
       />
 
       <section className="bg-paper py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-6 lg:grid-cols-[1fr_1.5fr]">
+        <div className="mx-auto grid grid-cols-1 max-w-7xl gap-12 px-5 md:px-6 lg:grid-cols-[1fr_1.5fr]">
           <div className="space-y-4">
             {cards.map((c, i) => (
               <Reveal key={c.label} delay={i * 0.07}>

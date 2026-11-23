@@ -60,7 +60,7 @@ export function PageHero({
           {number}
         </span>
       )}
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 md:px-6 md:py-20 lg:grid-cols-[1.2fr_1fr]">
+      <div className="relative mx-auto grid grid-cols-1 max-w-7xl items-center gap-10 px-5 py-14 md:px-6 md:py-20 lg:grid-cols-[1.2fr_1fr]">
         <div>
           <Breadcrumbs items={crumbs} />
           {eyebrow && (

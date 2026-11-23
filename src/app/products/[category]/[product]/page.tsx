@@ -71,7 +71,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[cate
           />
         </div>
 
-        <section className="mx-auto grid max-w-7xl gap-10 px-5 pt-8 pb-16 md:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:pb-24">
+        <section className="mx-auto grid grid-cols-1 max-w-7xl gap-10 px-5 pt-8 pb-16 md:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:pb-24">
           <Reveal y={20}>
             <ZoomImage src={p.image} alt={`${p.code} ${c.title}, ${p.name}, front and back`} />
             <div className="mt-4 grid grid-cols-4 gap-3">
@@ -163,7 +163,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[cate
               All {c.title.toLowerCase()}
             </Link>
           </div>
-          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-3">
             {others.map((x, i) => (
               <Reveal key={x.slug} delay={i * 0.08}>
                 <ProductCard

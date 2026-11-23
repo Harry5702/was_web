@@ -69,7 +69,7 @@ export function EnquiryForm({ items, onSent }: { items?: QuoteItem[]; onSent?: (
       className="space-y-5"
       noValidate={false}
     >
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Your name" name="name" required autoComplete="name" />
         <Field label="Team / club" name="team" autoComplete="organization" />
         <Field label="Email" name="email" type="email" required autoComplete="email" />
@@ -77,7 +77,7 @@ export function EnquiryForm({ items, onSent }: { items?: QuoteItem[]; onSent?: (
       </div>
 
       {!hasItems && (
-        <div className="grid gap-5 sm:grid-cols-[1.4fr_1fr]">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-[1.4fr_1fr]">
           <label className="block">
             <span className="mb-1.5 block text-xs font-semibold tracking-widest text-ink/60 uppercase">
               Product
@@ -97,7 +97,7 @@ export function EnquiryForm({ items, onSent }: { items?: QuoteItem[]; onSent?: (
         </div>
       )}
 
-      <div className="grid gap-5 sm:grid-cols-[1.4fr_1fr]">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-[1.4fr_1fr]">
         <fieldset>
           <legend className="mb-1.5 block text-xs font-semibold tracking-widest text-ink/60 uppercase">
             Sizes needed
@@ -136,14 +136,14 @@ export function EnquiryForm({ items, onSent }: { items?: QuoteItem[]; onSent?: (
       <div className="flex flex-wrap gap-3">
         <button
           type="submit"
-          className="btn-sweep chamfer-sm flex items-center gap-2.5 bg-[#25D366] px-7 py-3.5 font-display text-[17px] font-bold tracking-wider text-white uppercase [--sweep:var(--color-ink)]"
+          className="btn-sweep chamfer-sm flex items-center justify-center gap-2.5 bg-[#25D366] px-7 max-sm:w-full py-3.5 font-display text-[17px] font-bold tracking-wider text-white uppercase [--sweep:var(--color-ink)]"
         >
           <WhatsAppIcon className="size-[18px]" /> Send on WhatsApp
         </button>
         <button
           type="button"
           onClick={() => send("email")}
-          className="btn-sweep chamfer-sm flex items-center gap-2.5 bg-ink px-7 py-3.5 font-display text-[17px] font-bold tracking-wider text-white uppercase [--sweep:var(--color-gold)] hover:text-ink"
+          className="btn-sweep chamfer-sm flex items-center justify-center gap-2.5 bg-ink px-7 max-sm:w-full py-3.5 font-display text-[17px] font-bold tracking-wider text-white uppercase [--sweep:var(--color-gold)] hover:text-ink"
         >
           <Mail className="size-[18px]" /> Send by email
         </button>

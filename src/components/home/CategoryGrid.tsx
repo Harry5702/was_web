@@ -21,7 +21,7 @@ export function CategoryGrid() {
           }
         />
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c, i) => (
             <Reveal key={c.slug} delay={(i % 3) * 0.08}>
               <Link

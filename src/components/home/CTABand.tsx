@@ -21,7 +21,7 @@ export function CTABand({
       />
       <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-5 py-20 md:px-6 lg:flex-row lg:items-center">
         <div>
-          <h2 className="font-display text-5xl leading-[0.9] font-extrabold text-ink uppercase italic md:text-7xl">
+          <h2 className="font-display text-[2.6rem] leading-[0.9] font-extrabold text-ink uppercase italic sm:text-5xl md:text-7xl">
             <LineReveal lines={title} />
           </h2>
           <Reveal delay={0.2}>

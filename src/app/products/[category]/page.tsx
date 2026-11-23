@@ -75,7 +75,7 @@ export default async function CategoryPage({ params }: PageProps<"/products/[cat
               Tap <strong className="text-ink">+</strong> to add a design to your quote list
             </p>
           </div>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {c.products.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08}>
                 <ProductCard product={{ ...p, categoryTitle: c.title, categorySlug: c.slug }} />
@@ -86,7 +86,7 @@ export default async function CategoryPage({ params }: PageProps<"/products/[cat
       </section>
 
       <section className="bg-white py-16 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 md:px-6 lg:grid-cols-[1.3fr_1fr]">
+        <div className="mx-auto grid grid-cols-1 max-w-7xl gap-14 px-5 md:px-6 lg:grid-cols-[1.3fr_1fr]">
           <Reveal>
             <p className="font-tech text-[11px] font-bold tracking-[0.3em] text-gold-deep uppercase">
               Specifications
