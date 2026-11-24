@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Plus } from "lucide-react";
 import { quoteActions, useQuote } from "@/components/quote/useQuote";
+import { getCategory } from "@/lib/catalogue";
 
 export type ProductCardData = {
   code: string;
@@ -21,6 +22,8 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
   const inList = quote.some((i) => i.slug === product.slug);
   const [flash, setFlash] = useState(false);
   const href = `/products/${product.categorySlug}/${product.slug}`;
+  // singular product type, e.g. "Football Uniform"
+  const item = getCategory(product.categorySlug)?.item ?? product.categoryTitle;
 
   const add = () => {
     quoteActions.add({
@@ -37,7 +40,7 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
 
   return (
     <article className="group relative bg-white">
-      <Link href={href} className="block" aria-label={`${product.code} ${product.name}`}>
+      <Link href={href} className="block" aria-label={`${product.code} ${item}, ${product.name}`}>
         <div className="relative aspect-[1056/921] overflow-hidden bg-mist">
           <Image
             src={product.image}
@@ -46,16 +49,25 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
             sizes={sizes ?? "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"}
             className="object-cover transition-transform duration-700 ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-[1.06]"
           />
-          <span className="absolute top-3 left-3 bg-ink px-2 py-1 font-tech text-[10px] font-bold tracking-widest text-gold">
-            {product.code}
+          {/* article code + product type tag */}
+          {/* wraps the type onto a second line on narrow cards instead of cutting it off */}
+          <span className="absolute top-3 right-3 left-3 flex flex-wrap items-start">
+            <span className="flex items-stretch shadow-[0_4px_12px_-4px_rgba(0,0,0,0.35)]">
+              <span className="bg-ink px-2 py-1 font-tech text-[10px] leading-[1.6] font-bold tracking-widest text-gold">
+                {product.code}
+              </span>
+            </span>
+            <span className="bg-gold px-2 py-1 font-display text-[12px] leading-[1.35] font-bold tracking-wider whitespace-nowrap text-ink uppercase shadow-[0_4px_12px_-4px_rgba(0,0,0,0.35)]">
+              {item}
+            </span>
           </span>
         </div>
       </Link>
 
       <div className="relative flex items-start justify-between gap-3 p-4">
         <Link href={href} className="min-w-0">
-          <p className="text-[11px] font-medium tracking-[0.14em] text-ink/45 uppercase">
-            {product.categoryTitle}
+          <p className="truncate text-[11px] font-semibold tracking-[0.14em] text-gold-deep uppercase">
+            {item}
           </p>
           <h3 className="mt-1 truncate font-display text-xl leading-tight font-bold uppercase">
             {product.name}

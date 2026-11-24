@@ -12,6 +12,7 @@ export type Category = {
   slug: string;
   number: string; // "01".."11"
   title: string; // "Football Uniforms"
+  item: string; // singular product type shown as a tag, e.g. "Football Uniform"
   short: string; // short label used in menus
   tagline: string;
   description: string[]; // bullet list from catalogue
@@ -39,6 +40,7 @@ export const categories: Category[] = [
     slug: "football-uniforms",
     number: "01",
     title: "Football Uniforms",
+    item: "Football Uniform",
     short: "Football",
     tagline: "Match kits built for ninety minutes and then some.",
     description: [
@@ -61,6 +63,7 @@ export const categories: Category[] = [
     slug: "basketball-uniforms",
     number: "02",
     title: "Basketball Uniforms",
+    item: "Basketball Uniform",
     short: "Basketball",
     tagline: "Lightweight mesh sets cut for the full range of motion.",
     description: [
@@ -83,6 +86,7 @@ export const categories: Category[] = [
     slug: "baseball-uniforms",
     number: "03",
     title: "Baseball Uniforms",
+    item: "Baseball Uniform",
     short: "Baseball",
     tagline: "Full-button jerseys and knicker pants with classic piping.",
     description: [
@@ -105,6 +109,7 @@ export const categories: Category[] = [
     slug: "softball-uniforms",
     number: "04",
     title: "Softball Uniforms",
+    item: "Softball Uniform",
     short: "Softball",
     tagline: "Stretch-knit henley jerseys with fastpitch pants.",
     description: [
@@ -127,6 +132,7 @@ export const categories: Category[] = [
     slug: "american-football-uniforms",
     number: "05",
     title: "American Football Uniforms",
+    item: "American Football Uniform",
     short: "American Football",
     tagline: "Pro-cut jerseys made to sit over shoulder pads.",
     description: [
@@ -149,6 +155,7 @@ export const categories: Category[] = [
     slug: "ice-hockey-uniforms",
     number: "06",
     title: "Ice Hockey Uniforms",
+    item: "Ice Hockey Uniform",
     short: "Ice Hockey",
     tagline: "Oversized air-knit jerseys with lace-up collars.",
     description: [
@@ -171,6 +178,7 @@ export const categories: Category[] = [
     slug: "volleyball-uniforms",
     number: "07",
     title: "Volleyball Uniforms",
+    item: "Volleyball Uniform",
     short: "Volleyball",
     tagline: "Four-way stretch sets that move with every jump.",
     description: [
@@ -193,6 +201,7 @@ export const categories: Category[] = [
     slug: "rugby-uniforms",
     number: "08",
     title: "Rugby Uniforms",
+    item: "Rugby Uniform",
     short: "Rugby",
     tagline: "Heavyweight, tear-resistant kit for the contact game.",
     description: [
@@ -215,6 +224,7 @@ export const categories: Category[] = [
     slug: "sublimation-t-shirts",
     number: "09",
     title: "Sublimation T-Shirts",
+    item: "Sublimation T-Shirt",
     short: "T-Shirts",
     tagline: "Seam-to-seam sublimated performance tees.",
     description: [
@@ -241,6 +251,7 @@ export const categories: Category[] = [
     slug: "sublimation-tracksuits",
     number: "10",
     title: "Sublimation Tracksuits",
+    item: "Sublimation Tracksuit",
     short: "Tracksuits",
     tagline: "Full-zip team tracksuits for travel and warm-up.",
     description: [
@@ -263,6 +274,7 @@ export const categories: Category[] = [
     slug: "sublimation-shorts",
     number: "11",
     title: "Sublimation Shorts",
+    item: "Sublimation Shorts",
     short: "Shorts",
     tagline: "Mesh and micro-interlock shorts in any length.",
     description: [

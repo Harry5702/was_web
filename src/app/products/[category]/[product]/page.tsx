@@ -26,7 +26,7 @@ export async function generateMetadata({
   if (!found) return {};
   const { category: c, product: p } = found;
   return {
-    title: `${p.code} ${c.title.replace(/s$/, "")}, ${p.name}`,
+    title: `${p.code} ${c.item}, ${p.name}`,
     description: `${p.code} from the WAS ${c.title} range. ${materialOf(c)}. Custom colours, names, numbers and team logo, youth and adult sizes.`,
     openGraph: { images: [p.image] },
   };
@@ -103,9 +103,14 @@ export default async function ProductPage({ params }: PageProps<"/products/[cate
           </Reveal>
 
           <Reveal delay={0.1} y={20} className="lg:pt-2">
-            <p className="flex items-center gap-3 font-tech text-xs font-bold tracking-[0.25em] text-gold-deep uppercase">
-              <span className="h-[3px] w-8 bg-gold" />
-              {p.code}
+            {/* article code + product type tag */}
+            <p className="flex w-fit items-stretch">
+              <span className="bg-ink px-2.5 py-1.5 font-tech text-xs font-bold tracking-[0.2em] text-gold">
+                {p.code}
+              </span>
+              <span className="bg-gold px-2.5 py-1.5 font-display text-sm leading-[1.2] font-bold tracking-wider text-ink uppercase">
+                {c.item}
+              </span>
             </p>
             <h1 className="mt-4 font-display text-5xl leading-[0.9] font-extrabold uppercase md:text-6xl">
               {p.name}
