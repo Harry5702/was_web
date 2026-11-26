@@ -30,33 +30,33 @@ export function Process() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
   return (
-    <section id="process" className="bg-white py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 md:px-6">
+    <section id="process" className="bg-white py-20 md:py-28 lg:py-32">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           eyebrow="How we work"
           align="center"
           lines={["From idea to", "game day."]}
-          intro="Ordering custom uniforms with us takes four steps."
+          intro="Ordering from us takes four simple steps."
         />
 
         <div ref={ref} className="relative mt-16">
           {/* track + scroll-linked fill (desktop: horizontal, mobile: vertical) */}
-          <div className="absolute top-7 right-[12.5%] left-[12.5%] hidden h-[3px] bg-ink/10 lg:block">
+          <div className="absolute top-7 right-[12.5%] left-[12.5%] hidden h-px bg-ink/10 lg:block">
             <motion.div style={{ scaleX: progress }} className="h-full origin-left bg-gold" />
           </div>
-          <div className="absolute top-0 bottom-0 left-7 w-[3px] bg-ink/10 lg:hidden">
+          <div className="absolute top-0 bottom-0 left-7 w-px -translate-x-1/2 bg-ink/10 lg:hidden">
             <motion.div style={{ scaleY: progress }} className="h-full w-full origin-top bg-gold" />
           </div>
 
           <ol className="grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-6">
             {steps.map((s, i) => (
               <Reveal as="li" key={s.title} delay={i * 0.1} className="relative flex gap-6 lg:block lg:text-center">
-                <span className="relative z-10 grid size-14 shrink-0 place-items-center bg-ink font-tech text-lg font-bold text-gold [clip-path:polygon(50%_0,100%_25%,100%_75%,50%_100%,0_75%,0_25%)] lg:mx-auto">
+                <span className="relative z-10 grid size-14 shrink-0 place-items-center rounded-full border border-ink/10 bg-white font-display text-xl font-semibold text-ink shadow-[0_10px_30px_-12px_rgba(0,0,0,0.2)] lg:mx-auto">
                   0{i + 1}
                 </span>
-                <div className="lg:mt-6">
-                  <h3 className="font-display text-2xl font-extrabold uppercase">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/60 lg:mx-auto lg:max-w-[240px]">
+                <div className="pt-2 lg:mt-6 lg:pt-0">
+                  <h3 className="font-display text-2xl font-semibold tracking-tight uppercase">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed font-light text-ink/60 lg:mx-auto lg:max-w-[240px]">
                     {s.text}
                   </p>
                 </div>

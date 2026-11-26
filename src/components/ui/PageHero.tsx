@@ -9,7 +9,7 @@ export type Crumb = { href?: string; label: string };
 export function Breadcrumbs({ items, dark = true }: { items: Crumb[]; dark?: boolean }) {
   return (
     <nav aria-label="Breadcrumb">
-      <ol className={`flex flex-wrap items-center gap-1.5 text-[12px] tracking-wide uppercase ${dark ? "text-white/50" : "text-ink/50"}`}>
+      <ol className={`flex flex-wrap items-center gap-1.5 text-[12px] tracking-wide ${dark ? "text-white/50" : "text-ink/50"}`}>
         {items.map((c, i) => (
           <li key={i} className="flex items-center gap-1.5">
             {i > 0 && <ChevronRight className="size-3" aria-hidden />}
@@ -47,41 +47,37 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-slash relative overflow-hidden text-white">
-      <span
-        aria-hidden
-        className="absolute top-0 right-0 h-full w-[38%] bg-gold [clip-path:polygon(35%_0,100%_0,100%_100%,0_100%)] max-lg:hidden"
-      />
+    <section className="bg-glow relative overflow-hidden text-white">
       {number && (
         <span
           aria-hidden
-          className="text-outline pointer-events-none absolute -bottom-10 left-[40%] font-display text-[16rem] leading-none font-extrabold text-white/[0.06] italic select-none max-md:hidden"
+          className="pointer-events-none absolute -bottom-8 left-[42%] font-display text-[14rem] leading-none font-semibold text-white/[0.03] select-none max-lg:hidden"
         >
           {number}
         </span>
       )}
-      <div className="relative mx-auto grid grid-cols-1 max-w-7xl items-center gap-10 px-5 py-14 md:px-6 md:py-20 lg:grid-cols-[1.2fr_1fr]">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 py-14 md:px-8 md:py-20 lg:grid-cols-[1.2fr_1fr]">
         <div>
           <Breadcrumbs items={crumbs} />
           {eyebrow && (
-            <p className="mt-6 flex items-center gap-3 font-tech text-[11px] font-bold tracking-[0.3em] text-gold uppercase">
-              <span className="h-[3px] w-8 bg-gold" />
+            <p className="eyebrow mt-7 flex items-center gap-3 text-gold">
+              <span className="h-px w-8 bg-gold" />
               {eyebrow}
             </p>
           )}
-          <h1 className="mt-4 font-display text-[clamp(3rem,7vw,5.5rem)] leading-[0.88] font-extrabold uppercase italic">
+          <h1 className="mt-4 font-display text-[clamp(2.75rem,6.5vw,5rem)] leading-[0.92] font-semibold tracking-tight uppercase">
             <LineReveal immediate lines={title} />
           </h1>
           {intro && (
             <Reveal delay={0.3}>
-              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/65">{intro}</p>
+              <p className="mt-5 max-w-xl text-[15px] leading-relaxed font-light text-white/65">{intro}</p>
             </Reveal>
           )}
           {children}
         </div>
         {image && (
           <Reveal delay={0.2} y={40} className="relative mx-auto w-full max-w-md">
-            <div className="chamfer relative aspect-[1056/921] overflow-hidden bg-mist shadow-[0_40px_60px_-20px_rgba(0,0,0,0.6)]">
+            <div className="relative aspect-[1056/921] overflow-hidden rounded-3xl bg-mist ring-1 ring-white/10 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)]">
               <Image src={image.src} alt={image.alt} fill preload sizes="(max-width: 1024px) 90vw, 440px" className="object-cover" />
             </div>
           </Reveal>

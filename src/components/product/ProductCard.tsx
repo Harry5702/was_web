@@ -39,7 +39,7 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
   };
 
   return (
-    <article className="group relative bg-white">
+    <article className="group relative h-full overflow-hidden rounded-2xl bg-white ring-1 ring-ink/[0.05] transition-shadow duration-500 hover:shadow-[0_24px_50px_-28px_rgba(0,0,0,0.35)]">
       <Link href={href} className="block" aria-label={`${product.code} ${item}, ${product.name}`}>
         <div className="relative aspect-[1056/921] overflow-hidden bg-mist">
           <Image
@@ -51,13 +51,11 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
           />
           {/* article code + product type tag */}
           {/* wraps the type onto a second line on narrow cards instead of cutting it off */}
-          <span className="absolute top-3 right-3 left-3 flex flex-wrap items-start">
-            <span className="flex items-stretch shadow-[0_4px_12px_-4px_rgba(0,0,0,0.35)]">
-              <span className="bg-ink px-2 py-1 font-tech text-[10px] leading-[1.6] font-bold tracking-widest text-gold">
-                {product.code}
-              </span>
+          <span className="absolute top-3 right-3 left-3 flex flex-wrap items-start gap-1.5">
+            <span className="rounded-full bg-ink px-2.5 py-1 font-label text-[10.5px] leading-[1.5] font-medium tracking-wider text-gold">
+              {product.code}
             </span>
-            <span className="bg-gold px-2 py-1 font-display text-[12px] leading-[1.35] font-bold tracking-wider whitespace-nowrap text-ink uppercase shadow-[0_4px_12px_-4px_rgba(0,0,0,0.35)]">
+            <span className="rounded-full bg-white/90 px-2.5 py-1 font-label text-[10.5px] leading-[1.5] font-medium tracking-wide whitespace-nowrap text-ink backdrop-blur">
               {item}
             </span>
           </span>
@@ -66,17 +64,17 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
 
       <div className="relative flex items-start justify-between gap-3 p-4">
         <Link href={href} className="min-w-0">
-          <p className="truncate text-[11px] font-semibold tracking-[0.14em] text-gold-deep uppercase">
+          <p className="truncate text-[11px] font-medium tracking-[0.14em] text-gold-deep uppercase">
             {item}
           </p>
-          <h3 className="mt-1 truncate font-display text-xl leading-tight font-bold uppercase">
+          <h3 className="mt-1 truncate font-display text-xl leading-tight font-semibold uppercase">
             {product.name}
           </h3>
         </Link>
         <button
           type="button"
           onClick={add}
-          className={`relative grid size-10 shrink-0 place-items-center border-2 transition-colors duration-300 ${
+          className={`relative grid size-10 shrink-0 place-items-center rounded-full border transition-colors duration-300 ${
             inList ? "border-gold bg-gold text-ink" : "border-ink/15 text-ink hover:border-ink hover:bg-ink hover:text-gold"
           }`}
           aria-label={inList ? `${product.code} is in your quote list, add another` : `Add ${product.code} to quote list`}
@@ -89,7 +87,7 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                className="absolute right-0 bottom-full mb-2 bg-ink px-2.5 py-1.5 text-[11px] font-medium whitespace-nowrap text-white"
+                className="absolute right-0 bottom-full mb-2 rounded-full bg-ink px-3 py-1.5 text-[11px] font-medium whitespace-nowrap text-white"
               >
                 Added to quote list
               </motion.span>
@@ -97,7 +95,6 @@ export function ProductCard({ product, sizes }: { product: ProductCardData; size
           </AnimatePresence>
         </button>
       </div>
-      <span className="absolute inset-x-0 bottom-0 h-[3px] origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
     </article>
   );
 }

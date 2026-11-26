@@ -2,98 +2,100 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { categories } from "@/lib/catalogue";
+import { categoriesOf, departments } from "@/lib/catalogue";
 import { ProductCard } from "@/components/product/ProductCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ButtonLink } from "@/components/ui/Button";
 
+const FEATURED = 8;
+
+/** One design from each line first, then second designs, so every tab shows variety. */
+function featured(slug: (typeof departments)[number]["slug"]) {
+  const lines = categoriesOf(slug);
+  const most = Math.max(...lines.map((c) => c.products.length));
+  const picks = [];
+  for (let round = 0; round < most && picks.length < FEATURED; round++) {
+    for (const c of lines) {
+      const p = c.products[round];
+      if (p && picks.length < FEATURED) picks.push({ ...p, categoryTitle: c.title, categorySlug: c.slug });
+    }
+  }
+  return picks;
+}
+
 export function CatalogueTabs() {
   const [active, setActive] = useState(0);
-  const cat = categories[active];
+  const dept = departments[active];
 
   return (
-    <section className="bg-paper py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-5 md:px-6">
+    <section className="bg-paper py-20 md:py-28 lg:py-32">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           eyebrow="The catalogue"
           lines={["Pick a design,", "make it yours."]}
-          intro="Every design comes with an article code. Add the ones you like to your quote list and send them over in one go."
+          intro="Every design has an article code. Add the ones you like to your quote list and send them over in one go."
         />
 
-        <div className="relative mt-12 border-b border-ink/10">
-          <div
-            role="tablist"
-            aria-label="Product categories"
-            className="-mb-px flex gap-1 overflow-x-auto [scrollbar-width:none]"
-          >
-            {categories.map((c, i) => (
-              <button
-                key={c.slug}
-                role="tab"
-                type="button"
-                aria-selected={active === i}
-                aria-controls="catalogue-panel"
-                onClick={() => setActive(i)}
-                className={`relative shrink-0 px-4 py-3.5 font-display text-[17px] font-bold tracking-wide whitespace-nowrap uppercase transition-colors ${
-                  active === i ? "text-ink" : "text-ink/40 hover:text-ink/75"
-                }`}
-              >
-                {c.short}
-                {active === i && (
-                  <motion.span
-                    layoutId="tab-underline"
-                    className="absolute inset-x-0 bottom-0 h-[3px] bg-gold"
-                    transition={{ type: "spring", stiffness: 420, damping: 36 }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
+        <div
+          role="tablist"
+          aria-label="Collections"
+          className="mt-10 inline-flex rounded-full bg-white p-1 ring-1 ring-ink/[0.07] md:mt-12"
+        >
+          {departments.map((d, i) => (
+            <button
+              key={d.slug}
+              role="tab"
+              type="button"
+              aria-selected={active === i}
+              aria-controls="catalogue-panel"
+              onClick={() => setActive(i)}
+              className={`relative rounded-full px-4 py-2.5 text-[13.5px] font-medium whitespace-nowrap transition-colors sm:px-6 ${
+                active === i ? "text-ink" : "text-ink/55 hover:text-ink"
+              }`}
+            >
+              {active === i && (
+                <motion.span
+                  layoutId="tab-pill"
+                  className="absolute inset-0 rounded-full bg-gold"
+                  transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                />
+              )}
+              <span className="relative">{d.title}</span>
+            </button>
+          ))}
         </div>
 
-        <div id="catalogue-panel" role="tabpanel" className="mt-10 min-h-[420px]">
+        <div id="catalogue-panel" role="tabpanel" className="mt-8 min-h-[420px]">
           <AnimatePresence mode="wait">
             <motion.div
-              key={cat.slug}
+              key={dept.slug}
               initial="hidden"
               animate="show"
               exit="exit"
               variants={{
-                show: { transition: { staggerChildren: 0.06 } },
+                show: { transition: { staggerChildren: 0.05 } },
                 exit: { opacity: 0, transition: { duration: 0.15 } },
               }}
             >
-              <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
-                <p className="text-sm text-ink/60">
-                  <span className="mr-2 font-tech text-xs font-bold text-gold-deep">{cat.number}</span>
-                  {cat.tagline}
-                </p>
-                <ButtonLink
-                  href={`/products/${cat.slug}`}
-                  variant="dark"
-                  className="!px-5 !py-2.5 !text-[15px]"
-                >
-                  {cat.title}
-                </ButtonLink>
-              </div>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                {cat.products.map((p) => (
+              {/* phones: a swipeable row; wider screens: a grid */}
+              <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 min-[480px]:mx-0 min-[480px]:grid min-[480px]:grid-cols-2 min-[480px]:gap-5 min-[480px]:overflow-visible min-[480px]:px-0 min-[480px]:pb-0 lg:grid-cols-4">
+                {featured(dept.slug).map((p) => (
                   <motion.div
                     key={p.slug}
+                    className="w-[78%] shrink-0 snap-start min-[480px]:w-auto"
                     variants={{
                       hidden: { opacity: 0, y: 24 },
                       show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 1, 0.5, 1] } },
                     }}
                   >
-                    <ProductCard
-                      product={{
-                        ...p,
-                        categoryTitle: cat.title,
-                        categorySlug: cat.slug,
-                      }}
-                    />
+                    <ProductCard product={p} />
                   </motion.div>
                 ))}
+              </div>
+              <div className="mt-8 flex justify-center md:mt-10">
+                <ButtonLink href={`/products/${dept.slug}`} variant="dark">
+                  All {dept.title.toLowerCase()}
+                </ButtonLink>
               </div>
             </motion.div>
           </AnimatePresence>

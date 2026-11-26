@@ -8,7 +8,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
   const id = useId();
   return (
     <div>
-      <div role="tablist" className="flex gap-1 overflow-x-auto border-b border-ink/10 [scrollbar-width:none]">
+      <div role="tablist" className="no-scrollbar flex gap-1 overflow-x-auto border-b border-ink/10">
         {tabs.map((t, i) => (
           <button
             key={t.label}
@@ -18,13 +18,13 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
             aria-selected={active === i}
             aria-controls={`${id}-panel`}
             onClick={() => setActive(i)}
-            className={`relative shrink-0 px-4 py-3 font-display text-lg font-bold tracking-wide uppercase transition-colors ${
+            className={`relative shrink-0 px-4 py-3 text-[14px] font-medium transition-colors ${
               active === i ? "text-ink" : "text-ink/40 hover:text-ink/70"
             }`}
           >
             {t.label}
             {active === i && (
-              <motion.span layoutId={`${id}-underline`} className="absolute inset-x-0 -bottom-px h-[3px] bg-gold" />
+              <motion.span layoutId={`${id}-underline`} className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-gold" />
             )}
           </button>
         ))}

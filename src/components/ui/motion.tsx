@@ -56,7 +56,7 @@ export function LineReveal({
         <span key={i} className="block overflow-hidden pb-[0.06em]">
           <motion.span
             className={`block ${lineClassName ?? ""}`}
-            initial={{ y: reduce ? "0%" : "105%", rotate: reduce ? 0 : 2 }}
+            initial={{ y: reduce ? "0%" : "105%", rotate: 0 }}
             {...(immediate
               ? { animate: target }
               : { whileInView: target, viewport: { once: true, margin: "0px 0px -10% 0px" } })}

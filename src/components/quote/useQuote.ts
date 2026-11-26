@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { allProducts } from "@/lib/catalogue";
 
 export type QuoteItem = {
   slug: string; // product slug, e.g. "was-101"
@@ -13,6 +14,37 @@ export type QuoteItem = {
 };
 
 const KEY = "was-quote-list";
+export const MAX_QTY = 100000;
+
+/** Whole number between 1 and MAX_QTY. */
+export function clampQty(n: unknown) {
+  const v = Math.floor(Number(n));
+  return Number.isFinite(v) ? Math.min(MAX_QTY, Math.max(1, v)) : 1;
+}
+
+/**
+ * Stored lists come from localStorage, which anyone can edit. Keep only designs that exist in
+ * the catalogue and rebuild every field from it, so names and pictures are always current.
+ */
+function sanitize(raw: unknown): QuoteItem[] {
+  if (!Array.isArray(raw)) return EMPTY;
+  const out: QuoteItem[] = [];
+  for (const entry of raw.slice(0, 200)) {
+    const slug = entry && typeof entry === "object" ? (entry as { slug?: unknown }).slug : undefined;
+    const found = allProducts.find((p) => p.slug === slug);
+    if (!found || out.some((i) => i.slug === found.slug)) continue;
+    out.push({
+      slug: found.slug,
+      code: found.code,
+      name: found.name,
+      category: found.category.title,
+      categorySlug: found.category.slug,
+      image: found.image,
+      qty: clampQty((entry as { qty?: unknown }).qty),
+    });
+  }
+  return out;
+}
 const EMPTY: QuoteItem[] = [];
 let items: QuoteItem[] = EMPTY;
 let loaded = false;
@@ -23,8 +55,7 @@ function load() {
   loaded = true;
   try {
     const raw = window.localStorage.getItem(KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    if (Array.isArray(parsed)) items = parsed;
+    items = raw ? sanitize(JSON.parse(raw)) : EMPTY;
   } catch {
     items = EMPTY;
   }
@@ -66,13 +97,15 @@ export const quoteActions = {
     load();
     const existing = items.find((i) => i.slug === item.slug);
     commit(
-      existing
-        ? items.map((i) => (i.slug === item.slug ? { ...i, qty: i.qty + qty } : i))
-        : [...items, { ...item, qty }],
+      sanitize(
+        existing
+          ? items.map((i) => (i.slug === item.slug ? { ...i, qty: i.qty + clampQty(qty) } : i))
+          : [...items, { ...item, qty: clampQty(qty) }],
+      ),
     );
   },
   setQty(slug: string, qty: number) {
-    commit(items.map((i) => (i.slug === slug ? { ...i, qty: Math.max(1, qty) } : i)));
+    commit(items.map((i) => (i.slug === slug ? { ...i, qty: clampQty(qty) } : i)));
   },
   remove(slug: string) {
     commit(items.filter((i) => i.slug !== slug));

@@ -37,4 +37,4 @@ The quote and contact forms don't need a server. They build the message and open
 (+92 312 7536091) or the visitor's email app addressed to wasindustry0@gmail.com. To receive
 form submissions directly instead, add a Server Action that sends email (for example through Resend or SMTP).
 
-Set `NEXT_PUBLIC_SITE_URL` to the live domain when deploying so social share images resolve correctly.
+Set `NEXT_PUBLIC_SITE_URL` to the live domain (e.g. `https://wassportswear.com`) so canonical links, the sitemap and share images use it. On Vercel the production URL is used automatically if it is not set.

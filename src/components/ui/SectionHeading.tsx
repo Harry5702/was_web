@@ -23,19 +23,13 @@ export function SectionHeading({
         center ? "items-center text-center" : "md:flex-row md:items-end md:justify-between"
       }`}
     >
-      <div className={center ? "max-w-3xl" : "max-w-2xl"}>
+      <div className={center ? "max-w-2xl" : "max-w-2xl"}>
         <div className={`flex items-center gap-3 ${center ? "justify-center" : ""}`}>
-          <Slash className="h-[3px] w-8" />
-          <span
-            className={`font-tech text-[11px] font-bold tracking-[0.3em] uppercase ${
-              dark ? "text-gold" : "text-gold-deep"
-            }`}
-          >
-            {eyebrow}
-          </span>
+          <Slash className="h-px w-8" />
+          <span className={`eyebrow ${dark ? "text-gold" : "text-gold-deep"}`}>{eyebrow}</span>
         </div>
         <h2
-          className={`mt-4 font-display text-5xl leading-[0.92] font-extrabold uppercase md:text-6xl ${
+          className={`mt-4 font-display text-[2.6rem] leading-[0.95] font-semibold tracking-tight uppercase sm:text-5xl md:text-[3.5rem] ${
             dark ? "text-white" : "text-ink"
           }`}
         >
@@ -43,7 +37,11 @@ export function SectionHeading({
         </h2>
         {intro && (
           <Reveal delay={0.2}>
-            <p className={`mt-5 text-[15px] leading-relaxed ${dark ? "text-white/65" : "text-ink/65"}`}>
+            <p
+              className={`mt-5 text-[15px] leading-relaxed font-light ${center ? "mx-auto max-w-xl" : "max-w-xl"} ${
+                dark ? "text-white/65" : "text-ink/65"
+              }`}
+            >
               {intro}
             </p>
           </Reveal>

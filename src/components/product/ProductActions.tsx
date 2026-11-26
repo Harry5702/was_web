@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, ClipboardList, Mail, Minus, Plus } from "lucide-react";
-import { quoteActions, useQuote } from "@/components/quote/useQuote";
+import { MAX_QTY, clampQty, quoteActions, useQuote } from "@/components/quote/useQuote";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { mailtoLink, whatsappLink } from "@/lib/site";
 
@@ -29,11 +29,11 @@ export function ProductActions({
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-stretch gap-3">
-        <div className="flex items-center border-2 border-ink/15">
+        <div className="flex items-center rounded-full border border-ink/15 bg-white">
           <button
             type="button"
             onClick={() => setQty((q) => Math.max(1, q - 1))}
-            className="grid size-12 place-items-center transition-colors hover:bg-ink hover:text-gold"
+            className="grid size-12 place-items-center rounded-full transition-colors hover:bg-ink hover:text-gold"
             aria-label="Decrease quantity"
           >
             <Minus className="size-4" />
@@ -45,14 +45,15 @@ export function ProductActions({
             id="qty"
             type="number"
             min={1}
+            max={MAX_QTY}
             value={qty}
-            onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
-            className="w-16 [appearance:textfield] bg-transparent text-center font-tech text-sm font-bold outline-none [&::-webkit-inner-spin-button]:appearance-none"
+            onChange={(e) => setQty(clampQty(e.target.value))}
+            className="w-14 [appearance:textfield] bg-transparent text-center font-label text-sm font-medium outline-none [&::-webkit-inner-spin-button]:appearance-none"
           />
           <button
             type="button"
-            onClick={() => setQty((q) => q + 1)}
-            className="grid size-12 place-items-center transition-colors hover:bg-ink hover:text-gold"
+            onClick={() => setQty((q) => clampQty(q + 1))}
+            className="grid size-12 place-items-center rounded-full transition-colors hover:bg-ink hover:text-gold"
             aria-label="Increase quantity"
           >
             <Plus className="size-4" />
@@ -62,7 +63,7 @@ export function ProductActions({
         <button
           type="button"
           onClick={add}
-          className="btn-sweep chamfer-sm relative flex min-h-12 flex-1 items-center justify-center gap-2.5 bg-gold px-4 font-display sm:px-6 text-[17px] font-bold tracking-wider text-ink uppercase [--sweep:var(--color-ink)] hover:text-gold"
+          className="relative flex min-h-12 flex-1 items-center justify-center gap-2.5 rounded-full bg-gold px-4 text-[14px] font-medium tracking-wide text-ink transition-colors hover:bg-ink hover:text-gold sm:px-6"
         >
           <AnimatePresence mode="wait" initial={false}>
             {added ? (
@@ -96,13 +97,13 @@ export function ProductActions({
           href={whatsappLink(msg)}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 border-2 border-[#25D366] px-5 py-3 text-sm font-semibold text-[#128C4B] transition-colors hover:bg-[#25D366] hover:text-white"
+          className="flex items-center justify-center gap-2 rounded-full border border-[#25D366] px-5 py-3 text-sm font-medium text-[#128C4B] transition-colors hover:bg-[#25D366] hover:text-white"
         >
           <WhatsAppIcon className="size-[18px]" /> Enquire on WhatsApp
         </a>
         <a
           href={mailtoLink(`Quote request: ${product.code}`, msg)}
-          className="flex items-center justify-center gap-2 border-2 border-ink/15 px-5 py-3 text-sm font-semibold transition-colors hover:border-ink hover:bg-ink hover:text-white"
+          className="flex items-center justify-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-medium transition-colors hover:border-ink hover:bg-ink hover:text-white"
         >
           <Mail className="size-[18px]" /> Enquire by email
         </a>

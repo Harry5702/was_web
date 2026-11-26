@@ -1,51 +1,73 @@
-import type { Metadata } from "next";
-import { Barlow_Condensed, Orbitron, Poppins } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Barlow_Condensed, Poppins } from "next/font/google";
 import "./globals.css";
-import { TopBar } from "@/components/layout/TopBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { site, siteUrl } from "@/lib/site";
+import { JsonLd, defaultShareImage, organizationLd } from "@/lib/seo";
 
 const barlow = Barlow_Condensed({
   variable: "--font-barlow",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  style: ["normal", "italic"],
-});
-
-const orbitron = Orbitron({
-  variable: "--font-orbitron",
-  subsets: ["latin"],
-  weight: ["500", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  // Set NEXT_PUBLIC_SITE_URL to the live domain when deploying
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "WAS Sportswear | Custom Team Uniforms from Sialkot",
+    default: "WAS Sportswear | Custom Sportswear, Streetwear & Jackets Manufacturer",
     template: "%s | WAS Sportswear",
   },
-  description:
-    "Custom sublimated team uniforms, tracksuits, t-shirts and shorts made in Sialkot, Pakistan. Football, basketball, baseball, softball, American football, ice hockey, volleyball and rugby.",
+  description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: siteUrl }],
+  creator: site.name,
+  publisher: site.name,
+  category: "Apparel manufacturing",
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    locale: "en_US",
+    title: "WAS Sportswear | Custom Sportswear, Streetwear & Jackets",
+    description: site.description,
+    images: [defaultShareImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WAS Sportswear | Custom Sportswear, Streetwear & Jackets",
+    description: site.description,
+    images: [defaultShareImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  formatDetection: { telephone: false, email: false, address: false },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0c0c0c",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${barlow.variable} ${orbitron.variable} ${poppins.variable} antialiased`}
+      className={`${barlow.variable} ${poppins.variable} antialiased`}
     >
       <body className="flex min-h-screen flex-col">
+        <JsonLd data={organizationLd()} />
         <ScrollProgress />
-        <TopBar />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

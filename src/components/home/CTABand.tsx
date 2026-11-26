@@ -10,47 +10,50 @@ export function CTABand({
   title?: string[];
 }) {
   return (
-    <section className="relative overflow-hidden bg-gold">
-      <div className="bg-slash-light absolute inset-0" />
-      <Image
-        src="/brand/emblem.png"
-        alt=""
-        width={779}
-        height={846}
-        className="pointer-events-none absolute -right-16 -bottom-24 w-[380px] opacity-[0.12] md:w-[520px]"
-      />
-      <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-5 py-20 md:px-6 lg:flex-row lg:items-center">
-        <div>
-          <h2 className="font-display text-[2.6rem] leading-[0.9] font-extrabold text-ink uppercase italic sm:text-5xl md:text-7xl">
-            <LineReveal lines={title} />
-          </h2>
-          <Reveal delay={0.2}>
-            <p className="mt-5 max-w-md text-[15px] text-ink/75">
-              Send us the article codes you like, or your own design. Call{" "}
-              <a href={`tel:+${site.phones[0].raw}`} className="font-semibold underline-offset-4 hover:underline">
-                {site.phones[0].display}
-              </a>{" "}
-              or email{" "}
-              <a href={`mailto:${site.email}`} className="font-semibold underline-offset-4 hover:underline">
-                {site.email}
-              </a>
-              .
-            </p>
+    <section className="bg-paper px-3 py-3 sm:px-5 sm:py-5">
+      <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-[2rem] bg-gold">
+        <span className="pointer-events-none absolute -top-40 -left-40 size-[420px] rounded-full bg-white/25 blur-[100px]" />
+        <Image
+          src="/brand/emblem.png"
+          alt=""
+          width={779}
+          height={846}
+          className="pointer-events-none absolute -right-16 -bottom-24 w-[320px] opacity-[0.1] md:w-[460px]"
+        />
+        <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-6 py-16 md:px-12 md:py-20 lg:flex-row lg:items-center">
+          <div>
+            <h2 className="font-display text-[2.6rem] leading-[0.92] font-semibold tracking-tight text-ink uppercase sm:text-5xl md:text-[4.25rem]">
+              <LineReveal lines={title} />
+            </h2>
+            <Reveal delay={0.2}>
+              <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ink/75">
+                Send us the article codes you like, or your own design. Call{" "}
+                <a href={`tel:+${site.phones[0].raw}`} className="font-medium underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+                  {site.phones[0].display}
+                </a>{" "}
+                or email{" "}
+                <a href={`mailto:${site.email}`} className="font-medium break-all underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+                  {site.email}
+                </a>
+                .
+              </p>
+            </Reveal>
+          </div>
+          <Reveal delay={0.25} className="flex w-full flex-col gap-3 min-[420px]:w-auto min-[420px]:flex-row">
+            <ButtonLink href="/contact" variant="dark">
+              Request a quote
+            </ButtonLink>
+            <ButtonAnchor
+              variant="outline-dark"
+              href={whatsappLink("Hi WAS Sportswear, I would like a quote.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="!border-ink/30"
+            >
+              <WhatsAppIcon className="size-[18px]" /> WhatsApp
+            </ButtonAnchor>
           </Reveal>
         </div>
-        <Reveal delay={0.25} className="flex flex-wrap gap-3">
-          <ButtonLink href="/contact" variant="dark">
-            Request a quote
-          </ButtonLink>
-          <ButtonAnchor
-            variant="outline-dark"
-            href={whatsappLink("Hi WAS Sportswear, I would like a quote for custom uniforms.")}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <WhatsAppIcon className="size-[18px]" /> WhatsApp
-          </ButtonAnchor>
-        </Reveal>
       </div>
     </section>
   );

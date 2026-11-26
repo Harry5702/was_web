@@ -25,7 +25,7 @@ export function ZoomImage({ src, alt }: { src: string; alt: string }) {
       onPointerLeave={() => setZoom(false)}
       onPointerMove={move}
       onClick={() => setZoom((z) => !z)}
-      className={`relative aspect-[1056/921] overflow-hidden bg-mist ${zoom ? "cursor-zoom-out" : "cursor-zoom-in"}`}
+      className={`relative aspect-[1056/921] overflow-hidden rounded-3xl bg-mist ${zoom ? "cursor-zoom-out" : "cursor-zoom-in"}`}
     >
       <Image
         src={src}
@@ -37,9 +37,9 @@ export function ZoomImage({ src, alt }: { src: string; alt: string }) {
         className={`object-cover transition-transform duration-500 ease-[cubic-bezier(.25,1,.5,1)] ${zoom ? "scale-[2]" : "scale-100"}`}
       />
       <span
-        className={`pointer-events-none absolute right-3 bottom-3 flex items-center gap-1.5 bg-ink/85 px-2.5 py-1.5 text-[11px] text-white transition-opacity ${zoom ? "opacity-0" : "opacity-100"}`}
+        className={`pointer-events-none absolute right-3 bottom-3 flex items-center gap-1.5 rounded-full bg-ink/80 px-3 py-1.5 text-[11px] text-white backdrop-blur transition-opacity ${zoom ? "opacity-0" : "opacity-100"}`}
       >
-        <ZoomIn className="size-3.5" /> Hover to zoom
+        <ZoomIn className="size-3.5" /> <span className="max-md:hidden">Hover</span><span className="md:hidden">Tap</span> to zoom
       </span>
     </div>
   );

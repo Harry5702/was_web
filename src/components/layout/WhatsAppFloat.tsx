@@ -4,7 +4,7 @@ import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 export function WhatsAppFloat() {
   return (
     <a
-      href={whatsappLink("Hi WAS Sportswear, I would like a quote for custom uniforms.")}
+      href={whatsappLink("Hi WAS Sportswear, I would like a quote.")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with WAS Sportswear on WhatsApp"

@@ -1,5 +1,5 @@
-// All content in this file comes from the WAS Sportswear product catalogue.
-// Only the product lines, designs and options listed in the catalogue are included.
+// Product data for the three WAS collections: Sportswear, Streetwear and Jackets.
+// Sportswear content comes from the WAS product catalogue.
 
 export type Product = {
   code: string; // e.g. "WAS-101"
@@ -8,9 +8,12 @@ export type Product = {
   image: string;
 };
 
+export type DepartmentSlug = "sportswear" | "streetwear" | "jackets";
+
 export type Category = {
   slug: string;
-  number: string; // "01".."11"
+  department: DepartmentSlug;
+  number: string; // position within its department, "01".."11"
   title: string; // "Football Uniforms"
   item: string; // singular product type shown as a tag, e.g. "Football Uniform"
   short: string; // short label used in menus
@@ -35,7 +38,7 @@ function p(prefix: number, n: number, name: string): Product {
   return { code, slug, name, image: `/products/${slug}.webp` };
 }
 
-export const categories: Category[] = [
+const sportswear: Omit<Category, "department">[] = [
   {
     slug: "football-uniforms",
     number: "01",
@@ -294,6 +297,377 @@ export const categories: Category[] = [
     ],
   },
 ];
+
+// ---------------------------------------------------------------------------
+// Streetwear and Jackets. Pictures are WAS design mockups; details are a starting
+// point for the WAS team to adjust.
+// ---------------------------------------------------------------------------
+
+const streetwear: Omit<Category, "department">[] = [
+  {
+    slug: "caps-hats",
+    number: "01",
+    title: "Caps & Hats",
+    item: "Headwear",
+    short: "Caps & Hats",
+    tagline: "Snapbacks, truckers, beanies and bucket hats with your logo.",
+    description: [
+      "Material: Cotton twill, nylon, mesh back or acrylic knit",
+      "Snapback, trucker, dad cap, beanie and bucket hat styles",
+      "Structured or unstructured crowns, flat or curved brims",
+      "3D puff or flat embroidery, woven patches and rubber badges",
+      "Custom undervisor colour, inner taping and labels",
+    ],
+    products: [
+      p(12, 1, "Black Snapback / Gold Trucker"),
+      p(12, 2, "Black Beanie / Cream Bucket Hat"),
+    ],
+  },
+  {
+    slug: "blank-apparel",
+    number: "02",
+    title: "Blank Apparel",
+    item: "Blank Apparel",
+    short: "Blank Apparel",
+    tagline: "Plain hoodies, crewnecks and tees, ready for your own branding.",
+    description: [
+      "Material: Brushed cotton-polyester fleece and cotton jersey",
+      "Hoodies, crewneck sweatshirts, joggers and t-shirts",
+      "No logos or labels, ready for printing or embroidery",
+      "Wide colour range, matched across the whole set",
+      "Private neck labels and hang tags on request",
+    ],
+    products: [
+      p(13, 1, "Crewnecks in Four Colours"),
+      p(13, 2, "Heather Grey Hoodie"),
+    ],
+  },
+  {
+    slug: "accessories",
+    number: "03",
+    title: "Accessories",
+    item: "Accessory",
+    short: "Accessories",
+    tagline: "Socks, gloves, sleeves, skull wraps and towels to finish the kit.",
+    description: [
+      "Material: Performance knit, spandex, terry cotton and synthetic leather",
+      "Crew socks, arm sleeves, skull wraps, towels and gloves",
+      "Knitted-in or sublimated colours and logos",
+      "Grip palms on football gloves",
+      "Matched to your team or brand colours",
+    ],
+    products: [
+      p(14, 1, "Socks, Sleeve, Wrap & Towel"),
+      p(14, 2, "Receiver Gloves & Crew Socks"),
+    ],
+  },
+  {
+    slug: "embroidered-hoodies",
+    number: "04",
+    title: "Embroidered Hoodies",
+    item: "Embroidered Hoodie",
+    short: "Embroidered",
+    tagline: "Heavyweight hoodies with stitched logos and lettering.",
+    description: [
+      "Material: Heavyweight cotton-polyester brushed fleece",
+      "Flat, 3D puff or appliqué embroidery",
+      "Chest, sleeve, back and hood placements",
+      "Ribbed cuffs and hem, lined hood with drawcords",
+      "Pullover or zip-up styles",
+    ],
+    products: [
+      p(15, 1, "Black / Gold Chest Logo"),
+      p(15, 2, "Cream / Black Arch Lettering"),
+    ],
+  },
+  {
+    slug: "oversized-t-shirts",
+    number: "05",
+    title: "Oversized T-Shirts",
+    item: "Oversized T-Shirt",
+    short: "Oversized Tees",
+    tagline: "Boxy, drop-shoulder tees with bold front and back prints.",
+    description: [
+      "Material: Heavyweight combed cotton jersey",
+      "Boxy fit with dropped shoulders and a thick ribbed collar",
+      "Screen print, puff print, DTG or embroidery",
+      "Garment-dyed and washed finishes available",
+      "Private neck labels and hang tags on request",
+    ],
+    products: [
+      p(16, 1, "Black / Gold Wolf Back Print"),
+      p(16, 2, "Off-White / Stubborn Back Print"),
+    ],
+  },
+  {
+    slug: "fleece-sweatsuits",
+    number: "06",
+    title: "Fleece Sweatsuits",
+    item: "Fleece Sweatsuit",
+    short: "Sweatsuits",
+    tagline: "Matching hoodie or crewneck and jogger sets.",
+    description: [
+      "Material: Brushed cotton-polyester fleece",
+      "Hoodie or crewneck top with matching joggers",
+      "Tapered joggers with cuffs, drawcord and pockets",
+      "Embroidered or printed logos on top and leg",
+      "Colours matched across the whole set",
+    ],
+    products: [
+      p(17, 1, "Black Hoodie & Jogger Set"),
+      p(17, 2, "Grey Crewneck & Jogger Set"),
+    ],
+  },
+  {
+    slug: "puff-print-hoodies",
+    number: "07",
+    title: "Puff Print Hoodies",
+    item: "Puff Print Hoodie",
+    short: "Puff Print",
+    tagline: "Raised 3D puff print graphics that stand off the fabric.",
+    description: [
+      "Material: Heavyweight cotton-polyester brushed fleece",
+      "Raised 3D puff print in one or more colours",
+      "Large chest, back and sleeve graphics",
+      "Soft-hand finish that holds its shape after washing",
+      "Pullover or zip-up styles",
+    ],
+    products: [
+      p(18, 1, "Black / Gold Puff Lettering"),
+      p(18, 2, "Sand / Black Puff Lettering"),
+    ],
+  },
+  {
+    slug: "chenille-hoodies",
+    number: "08",
+    title: "Chenille Hoodies",
+    item: "Chenille Hoodie",
+    short: "Chenille",
+    tagline: "Hoodies with fuzzy chenille letters and patches.",
+    description: [
+      "Material: Heavyweight cotton-polyester brushed fleece",
+      "Chenille letters, numbers and patches with felt borders",
+      "Combined with embroidery for detail",
+      "Chest, back and sleeve placements",
+      "Pullover or zip-up styles",
+    ],
+    products: [
+      p(19, 1, "Black / Gold Chenille Letter"),
+      p(19, 2, "Cream / Chenille Patches"),
+    ],
+  },
+  {
+    slug: "varsity-hoodies",
+    number: "09",
+    title: "Varsity Hoodies",
+    item: "Varsity Hoodie",
+    short: "Varsity Hoodies",
+    tagline: "College-style hoodies with contrast sleeves and striped trims.",
+    description: [
+      "Material: Heavyweight cotton-polyester brushed fleece",
+      "Contrast sleeves and striped varsity rib trims",
+      "Chenille letters, tackle twill and felt numbers",
+      "Pullover or zip-up styles",
+      "Team and brand colours on every panel",
+    ],
+    products: [
+      p(20, 1, "Black / Gold Sleeve Zip Hoodie"),
+      p(20, 2, "Grey / Arched Tackle Twill"),
+    ],
+  },
+  {
+    slug: "acid-wash-streetwear",
+    number: "10",
+    title: "Acid Wash Streetwear",
+    item: "Acid Wash Apparel",
+    short: "Acid Wash",
+    tagline: "Vintage-washed hoodies, tees, joggers and shorts.",
+    description: [
+      "Material: Cotton fleece and cotton jersey, mineral washed",
+      "Acid, stone and vintage wash finishes",
+      "Every piece has a slightly different wash pattern",
+      "Cracked prints, embroidery and puff print",
+      "Hoodies, tees, joggers and shorts as sets",
+    ],
+    products: [
+      p(21, 1, "Charcoal Zip Hoodie & Joggers"),
+      p(21, 2, "Faded Black Tee & Shorts"),
+    ],
+  },
+];
+
+const jackets: Omit<Category, "department">[] = [
+  {
+    slug: "varsity-jackets",
+    number: "01",
+    title: "Varsity Jackets",
+    item: "Varsity Jacket",
+    short: "Varsity",
+    tagline: "Wool and leather letterman jackets with chenille patches.",
+    description: [
+      "Material: Wool blend body with leather or PU sleeves",
+      "Striped knit collar, cuffs and hem",
+      "Snap-button front with welt pockets",
+      "Chenille letters, embroidered patches and back lettering",
+      "Quilted lining, with an inside pocket",
+    ],
+    products: [
+      p(22, 1, "Black Wool / Gold Sleeves"),
+      p(22, 2, "Cream Wool / Black Sleeves"),
+    ],
+  },
+  {
+    slug: "bomber-jackets",
+    number: "02",
+    title: "Bomber Jackets",
+    item: "Bomber Jacket",
+    short: "Bomber",
+    tagline: "Flight and satin bombers with striped ribbed trims.",
+    description: [
+      "Material: Nylon or satin shell with padded or quilted lining",
+      "MA-1 flight and satin bomber styles",
+      "Ribbed collar, cuffs and hem with contrast stripes",
+      "Sleeve utility pocket and zip front",
+      "Embroidered logos, patches and back prints",
+    ],
+    products: [
+      p(27, 1, "Matte Black MA-1 / Gold Stripes"),
+      p(27, 2, "Navy Satin / Gold Trim"),
+    ],
+  },
+  {
+    slug: "windbreakers-outerwear",
+    number: "03",
+    title: "Windbreakers & Outerwear",
+    item: "Windbreaker",
+    short: "Windbreakers",
+    tagline: "Lightweight shells and track jackets for training and travel.",
+    description: [
+      "Material: Lightweight nylon or polyester taffeta",
+      "Half-zip anorak or full-zip track styles",
+      "Mesh lining, elastic cuffs and adjustable hem",
+      "Colour-block panels in team or brand colours",
+      "Packable and wind-resistant",
+    ],
+    products: [
+      p(24, 1, "Black / Gold Half-Zip Anorak"),
+      p(24, 2, "Black Track Jacket / Gold Panels"),
+    ],
+  },
+  {
+    slug: "puffer-jackets",
+    number: "04",
+    title: "Puffer Jackets",
+    item: "Puffer Jacket",
+    short: "Puffer",
+    tagline: "Quilted, insulated jackets for the cold months.",
+    description: [
+      "Material: Nylon shell with synthetic insulation",
+      "Quilted baffles with a hood and stand-up collar",
+      "Matte or colour-block finishes",
+      "Zip hand pockets and inner pocket",
+      "Embroidered or printed logos",
+    ],
+    products: [
+      p(25, 1, "Matte Black / Gold Zip"),
+      p(25, 2, "Black / Gold Colour Block"),
+    ],
+  },
+  {
+    slug: "coach-jackets",
+    number: "05",
+    title: "Coach Jackets",
+    item: "Coach Jacket",
+    short: "Coach",
+    tagline: "Snap-front nylon jackets with big back prints.",
+    description: [
+      "Material: Water-resistant nylon with mesh or quilted lining",
+      "Snap-button front and turn-down collar",
+      "Drawcord hem and side pockets",
+      "Large back prints and small chest logos",
+      "Solid or colour-block styles",
+    ],
+    products: [
+      p(26, 1, "Black / Gold Back Print"),
+      p(26, 2, "Cream / Black Colour Block"),
+    ],
+  },
+];
+
+export type Department = {
+  slug: DepartmentSlug;
+  title: string;
+  tagline: string;
+  intro: string;
+  image: string; // cover picture for tiles and the collection page
+  sizes: string; // shown on product pages
+  customNote: string; // completes "<code> is shown here in WAS colours. It can be made ..."
+  options: { key: string; label: string }[];
+};
+
+export const departments: Department[] = [
+  {
+    slug: "sportswear",
+    title: "Sportswear",
+    tagline: "Sublimated team uniforms for eight sports, plus tracksuits, tees and shorts.",
+    intro:
+      "Team uniforms for football, basketball, baseball, softball, American football, ice hockey, volleyball and rugby, plus sublimation t-shirts, tracksuits and shorts.",
+    image: "/products/was-801.webp",
+    sizes: "Youth & Adult",
+    customNote: "in your team colours with your own logo, sponsor, player names and numbers",
+    options: [...customOptions],
+  },
+  {
+    slug: "streetwear",
+    title: "Streetwear",
+    tagline: "Hoodies, sweatsuits, oversized tees, headwear and accessories.",
+    intro:
+      "Embroidered, puff print, chenille and varsity hoodies, sweatsuits, oversized tees, acid wash sets, blank apparel, caps and accessories for brands and teams.",
+    image: "/products/was-1701.webp",
+    sizes: "XS – 3XL",
+    customNote: "in your colours and fabric, with your own logo, artwork and labels",
+    options: [
+      { key: "colour", label: "Custom Colours & Fabrics" },
+      { key: "decoration", label: "Embroidery, Puff & Chenille" },
+      { key: "logo", label: "Your Logo & Artwork" },
+      { key: "label", label: "Private Label & Tags" },
+    ],
+  },
+  {
+    slug: "jackets",
+    title: "Jackets",
+    tagline: "Varsity, bomber, puffer and coach jackets, plus windbreakers.",
+    intro:
+      "Varsity jackets, bomber jackets, windbreakers, puffer jackets and coach jackets, all made to order with your colours, patches, embroidery and labels.",
+    image: "/products/was-2201.webp",
+    sizes: "Youth & Adult",
+    customNote: "in your colours and materials, with your own patches, embroidery and labels",
+    options: [
+      { key: "colour", label: "Custom Colours & Materials" },
+      { key: "patches", label: "Chenille Patches & Embroidery" },
+      { key: "logo", label: "Your Logo & Artwork" },
+      { key: "label", label: "Private Label & Tags" },
+    ],
+  },
+];
+
+export const categories: Category[] = [
+  ...sportswear.map((c) => ({ ...c, department: "sportswear" as const })),
+  ...streetwear.map((c) => ({ ...c, department: "streetwear" as const })),
+  ...jackets.map((c) => ({ ...c, department: "jackets" as const })),
+];
+
+export function getDepartment(slug: string) {
+  return departments.find((d) => d.slug === slug);
+}
+
+export function categoriesOf(department: DepartmentSlug) {
+  return categories.filter((c) => c.department === department);
+}
+
+export function departmentOf(category: Category) {
+  return departments.find((d) => d.slug === category.department)!;
+}
 
 export const allProducts = categories.flatMap((c) =>
   c.products.map((product) => ({ ...product, category: c })),

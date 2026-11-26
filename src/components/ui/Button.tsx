@@ -5,15 +5,14 @@ import type { ComponentProps, ReactNode } from "react";
 type Variant = "gold" | "dark" | "outline-light" | "outline-dark";
 
 const styles: Record<Variant, string> = {
-  gold: "bg-gold text-ink [--sweep:#fff]",
-  dark: "bg-ink text-white [--sweep:var(--color-gold)] hover:text-ink",
-  "outline-light":
-    "border-2 border-white/30 text-white [--sweep:#fff] hover:text-ink hover:border-white",
-  "outline-dark": "border-2 border-ink text-ink [--sweep:var(--color-ink)] hover:text-white",
+  gold: "bg-gold text-ink hover:bg-[#f0c428] shadow-[0_10px_30px_-12px_rgba(229,179,11,0.7)]",
+  dark: "bg-ink text-white hover:bg-ink-3",
+  "outline-light": "border border-white/25 text-white hover:border-white hover:bg-white hover:text-ink",
+  "outline-dark": "border border-ink/20 text-ink hover:border-ink hover:bg-ink hover:text-white",
 };
 
 const base =
-  "btn-sweep chamfer-sm group inline-flex items-center justify-center gap-2.5 whitespace-nowrap px-7 py-3.5 font-display text-[17px] font-bold tracking-wider uppercase transition-colors duration-300";
+  "group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-6 py-3.5 text-[14px] font-medium tracking-wide transition-all duration-300 active:scale-[0.98] sm:px-7";
 
 export function ButtonLink({
   variant = "gold",
@@ -26,7 +25,7 @@ export function ButtonLink({
     <Link {...props} className={`${base} ${styles[variant]} ${className}`}>
       {children}
       {arrow && (
-        <ArrowRight className="size-[18px] transition-transform duration-300 group-hover:translate-x-1" />
+        <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
       )}
     </Link>
   );
