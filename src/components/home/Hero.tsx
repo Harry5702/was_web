@@ -60,21 +60,42 @@ export function Hero() {
     return () => clearTimeout(t);
   }, [active, paused, reduce]);
 
+  // Phones: true while the visitor is swiping, so their swipe sets the featured card
+  // instead of the auto-scroll fighting it.
+  const userSwiping = useRef(false);
+
+  // Distance between two cards in the swipe row (card width + 12px gap).
+  const cardStep = () => {
+    const card = rowRef.current?.firstElementChild as HTMLElement | null;
+    return card ? card.offsetWidth + 12 : 0;
+  };
+
   // Phones: track which card is snapped into view, for the dots.
   const onScroll = () => {
     const el = rowRef.current;
-    if (!el) return;
-    const card = el.firstElementChild as HTMLElement | null;
-    if (!card) return;
-    const step = card.offsetWidth + 12;
-    setSwipeIndex(Math.min(athletes.length - 1, Math.round(el.scrollLeft / step)));
+    const step = cardStep();
+    if (!el || !step) return;
+    const i = Math.min(athletes.length - 1, Math.round(el.scrollLeft / step));
+    setSwipeIndex(i);
+    if (userSwiping.current) setActive(i);
   };
 
   const scrollToCard = (i: number) => {
     const el = rowRef.current;
-    const card = el?.children[i] as HTMLElement | undefined;
-    if (el && card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+    const step = cardStep();
+    if (!el || !step) return;
+    userSwiping.current = false;
+    el.scrollTo({ left: i * step, behavior: "smooth" });
   };
+
+  // Phones: move the swipe row along with the featured card, like the panels on larger screens.
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 767px)").matches || userSwiping.current) return;
+    const el = rowRef.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (!el || !card) return;
+    el.scrollTo({ left: active * (card.offsetWidth + 12), behavior: reduce ? "auto" : "smooth" });
+  }, [active, reduce]);
 
   return (
     <section className="bg-glow relative overflow-hidden text-white">
@@ -165,6 +186,15 @@ export function Hero() {
             ref={rowRef}
             onScroll={onScroll}
             onMouseLeave={() => setPaused(false)}
+            onTouchStart={() => {
+              userSwiping.current = true;
+              setPaused(true);
+            }}
+            onTouchEnd={() => {
+              setPaused(false);
+              // let the swipe finish snapping, then hand control back to the auto-scroll
+              setTimeout(() => (userSwiping.current = false), 800);
+            }}
             className="no-scrollbar relative -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 md:mx-0 md:h-[clamp(440px,62vh,620px)] md:snap-none md:overflow-visible md:px-0"
           >
             {athletes.map((a, i) => {
