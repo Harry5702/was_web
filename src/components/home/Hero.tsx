@@ -106,10 +106,19 @@ export function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-            className="eyebrow flex items-center gap-3 text-gold"
+            className="eyebrow flex items-center gap-3 text-white/60"
           >
             <span className="h-px w-8 bg-gold" />
-            Sialkot, Pakistan · Made to order
+            {/* what WAS stands for: the initials in gold spell the name */}
+            <span>
+              {["We", "Are", "Stubborn"].map((word, i) => (
+                <span key={word}>
+                  {i > 0 && " "}
+                  <span className="font-semibold text-gold">{word[0]}</span>
+                  {word.slice(1)}
+                </span>
+              ))}
+            </span>
           </motion.p>
 
           <h1 className="mt-6 font-display text-[clamp(2.9rem,11vw,4.5rem)] leading-[0.92] font-semibold tracking-tight uppercase lg:text-[clamp(3.6rem,5.2vw,5.4rem)]">
