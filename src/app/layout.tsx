@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/layout/WhatsAppFloat";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { PageFade } from "@/components/layout/PageFade";
 import { site, siteUrl } from "@/lib/site";
 import { JsonLd, defaultShareImage, organizationLd } from "@/lib/seo";
 
@@ -63,13 +64,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${barlow.variable} ${poppins.variable} antialiased`}
     >
       <body className="flex min-h-screen flex-col">
         <JsonLd data={organizationLd()} />
         <ScrollProgress />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageFade>{children}</PageFade>
+        </main>
         <Footer />
         <WhatsAppFloat />
       </body>
